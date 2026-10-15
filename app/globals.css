@@ -337,3 +337,68 @@ body {
     width: 2.5rem;
   }
 }
+
+@keyframes section-in {
+  from {
+    opacity: 0;
+    translate: 0 1.25rem;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main > section.reveal:not(.is-revealed) {
+    opacity: 0;
+    translate: 0 1.25rem;
+  }
+
+  main > section.reveal.is-revealed {
+    animation: section-in 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+main :is(figure, .relative):has(> img) {
+  overflow: hidden;
+}
+
+main :is(figure, .relative):has(> img) > img {
+  transition: scale 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  main :is(figure, .relative):has(> img):hover > img {
+    scale: 1.035;
+  }
+}
+
+.mobile-nav {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease;
+}
+
+.mobile-nav.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.mobile-nav-panel {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav {
+    transition: none;
+  }
+
+  main :is(figure, .relative):has(> img) > img {
+    transition: none;
+  }
+}

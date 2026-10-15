@@ -93,8 +93,14 @@ export function SiteHeader() {
           </span>
         </button>
       </div>
-      {open ? (
-        <nav id="mobile-nav" className="border-t border-black/5 bg-white lg:hidden" aria-label="Mobile">
+      <nav
+        id="mobile-nav"
+        aria-label="Mobile"
+        inert={!open}
+        aria-hidden={!open}
+        className={`mobile-nav border-black/5 bg-white lg:hidden ${open ? "is-open border-t" : ""}`}
+      >
+        <div className="mobile-nav-panel">
           <div className="page-wrap flex flex-col gap-1 py-4">
             {navLinks.map((link) => (
               <Link
@@ -124,8 +130,8 @@ export function SiteHeader() {
               Get Involved
             </Link>
           </div>
-        </nav>
-      ) : null}
+        </div>
+      </nav>
     </header>
   );
 }

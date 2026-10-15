@@ -171,7 +171,7 @@ function RailButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={`Show ${direction} ${label}`}
-      className={`inline-flex size-11 items-center justify-center border border-ink/15 bg-white text-lg text-ink transition-opacity hover:border-blue hover:text-blue disabled:cursor-default disabled:opacity-40 ${
+      className={`inline-flex size-11 items-center justify-center border border-ink/15 bg-white text-lg text-ink transition-[opacity,color,border-color,scale] duration-200 hover:scale-[1.03] hover:border-blue hover:text-blue disabled:cursor-default disabled:opacity-40 disabled:hover:scale-100 ${
         floating
           ? `absolute top-1/2 z-10 -translate-y-1/2 bg-white/95 shadow-[0_1px_4px_rgba(23,35,28,0.16)] ${
               direction === "previous" ? "left-3" : "right-3"

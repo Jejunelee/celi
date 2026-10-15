@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Serif_Display, Inter, Playfair_Display } from "next/font/google";
 import { HashScroll } from "@/components/hash-scroll";
+import { SectionReveal } from "@/components/section-reveal";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <HashScroll />
+        <SectionReveal />
         <SiteHeader />
         <main id="content" className="flex-1">
           {children}
