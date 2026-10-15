@@ -1,0 +1,158 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { PeopleRail } from "@/components/people-rail";
+import { events } from "@/lib/content";
+
+export const metadata: Metadata = {
+  title: "Features",
+  description:
+    "Meet the people, programs, and practical work behind CELI’s mission.",
+};
+
+export default function FeaturesPage() {
+  return (
+    <>
+      <section className="relative isolate min-h-[620px] overflow-hidden lg:min-h-[760px]">
+        <Image
+          src="/images/hero-home.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_24%]"
+        />
+        <div className="absolute inset-0 bg-white/80" />
+        <div className="page-wrap relative flex min-h-[620px] flex-col items-center justify-center py-16 text-center lg:min-h-[760px]">
+          <p className="text-sm font-medium tracking-[0.14em] text-ink-soft uppercase sm:text-lg">
+            Culinary Eco Life Inc.
+          </p>
+          <h1 className="mt-4 max-w-4xl font-display text-[clamp(2.6rem,6vw,5.4rem)] leading-[0.98] font-semibold tracking-[-0.04em] text-ink">
+            Meet the hands that feed the mission.
+          </h1>
+          <p className="mt-6 max-w-3xl text-base leading-7 text-ink sm:text-lg lg:text-xl">
+            Discover the people, programs, and practical work behind CELI&apos;s mission to create
+            opportunity through culinary education, sustainable livelihood, and environmental
+            stewardship.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="#people"
+              className="inline-flex h-[50px] min-w-[220px] items-center justify-center bg-blue px-6 text-sm font-medium tracking-[0.08em] text-white uppercase hover:bg-[#263a86] lg:min-w-[250px]"
+            >
+              Meet the people
+            </a>
+            <a
+              href="#work"
+              className="inline-flex h-[50px] min-w-[220px] items-center justify-center border-2 border-black bg-white/70 px-6 text-sm font-medium tracking-[0.08em] uppercase hover:bg-black hover:text-white lg:min-w-[250px]"
+            >
+              Explore our work
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white" aria-labelledby="quote-heading">
+        <div className="page-wrap grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
+          <figure className="relative mx-auto aspect-[598/570] w-full max-w-xl overflow-hidden bg-sage">
+            <Image
+              src="/images/quote.png"
+              alt="Susana Guerrero and colleagues with hands raised during a gathering"
+              fill
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="object-cover object-[48%_32%]"
+            />
+            <div className="absolute inset-0 bg-blue/40 mix-blend-multiply" />
+            <span className="pointer-events-none absolute top-2 left-4 font-display text-7xl text-white sm:text-8xl" aria-hidden>
+              “
+            </span>
+            <span className="pointer-events-none absolute right-5 bottom-2 font-display text-7xl text-white sm:text-8xl" aria-hidden>
+              ”
+            </span>
+          </figure>
+          <div>
+            <p className="text-[13px] font-bold tracking-[0.18em] text-blue uppercase">
+              A word from our founder
+            </p>
+            <blockquote>
+              <p
+                id="quote-heading"
+                className="mt-4 font-display text-[clamp(1.7rem,3.2vw,3.4rem)] leading-[1.12] font-medium tracking-[-0.03em] text-ink italic"
+              >
+                “I’m ever thankful to our Lord for giving me with overflowing passion for two of my
+                greatest crusades in life: the culinary profession and protecting the environment.”
+              </p>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section id="people" className="scroll-mt-28 bg-sand">
+        <div className="page-wrap py-16 lg:py-24">
+          <p className="text-[13px] font-bold tracking-[0.18em] text-blue uppercase">
+            The people behind CELI
+          </p>
+          <h2 className="mt-3 max-w-3xl font-display text-[clamp(2.4rem,5vw,4.4rem)] leading-[0.98] font-semibold tracking-[-0.04em] text-green-deep">
+            Meet the people behind the plate.
+          </h2>
+          <div className="mt-8">
+            <PeopleRail />
+          </div>
+        </div>
+      </section>
+
+      <section id="work" className="scroll-mt-28 bg-blue text-white">
+        <div className="page-wrap py-16 lg:py-24">
+          <p className="text-[11px] font-bold tracking-[0.18em] text-white/70 uppercase">
+            Our work in action
+          </p>
+          <h2 className="mt-3 max-w-xl font-display text-[clamp(2.6rem,5.4vw,5rem)] leading-[0.95] font-bold tracking-[-0.04em]">
+            Events we are proud of
+          </h2>
+          <div className="mt-12 space-y-16 lg:mt-16 lg:space-y-24">
+            {events.map((event) => (
+              <article
+                key={event.id}
+                id={event.id}
+                className="scroll-mt-28 grid items-center gap-8 lg:grid-cols-2 lg:gap-14"
+              >
+                <div className={`relative aspect-[575/450] bg-sage ${event.flip ? "lg:order-2" : ""}`}>
+                  {event.image ? (
+                    <Image
+                      src={event.image}
+                      alt={event.alt}
+                      fill
+                      sizes="(min-width: 1024px) 40vw, 100vw"
+                      className="object-cover"
+                      style={{ objectPosition: event.position }}
+                    />
+                  ) : null}
+                  <span className="pointer-events-none absolute right-4 bottom-4 size-14 border border-white/55 sm:size-[72px]" aria-hidden />
+                </div>
+                <div>
+                  <p className="text-[11px] font-bold tracking-[0.16em] text-white/60 uppercase">
+                    {event.kicker}
+                  </p>
+                  <h3 className="mt-3 font-display text-[clamp(2rem,3.4vw,3.5rem)] leading-[1.02] font-bold tracking-[-0.03em]">
+                    {event.title}
+                  </h3>
+                  <div className="mt-5 space-y-4 text-sm leading-7 text-white/80 sm:text-[15px]">
+                    {event.paragraphs.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                  <Link
+                    href="/#get-involved"
+                    className="mt-6 inline-flex items-center gap-3 text-[11px] font-bold tracking-[0.16em] uppercase hover:text-cream"
+                  >
+                    Get involved <span aria-hidden>→</span>
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
