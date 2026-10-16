@@ -1,13 +1,12 @@
 export const navLinks = [
-  { href: "/#about", label: "About Us" },
+  { href: "/about", label: "About Us" },
   { href: "/partners", label: "Partners" },
   { href: "/impact", label: "Impact" },
   { href: "/#contact", label: "Contact Us" },
 ] as const;
 
 export const footerLinks = [
-  { href: "/#about", label: "About" },
-  { href: "/features", label: "Features" },
+  { href: "/about", label: "About" },
   { href: "/partners", label: "Partners" },
   { href: "/impact", label: "Impact" },
   { href: "/#contact", label: "Contact" },
@@ -63,6 +62,17 @@ export const timeline = [
   },
 ] as const;
 
+export const successfulScholars = [
+  {
+    name: "JM Sto. Domingo",
+    story: "A deaf chef honored abroad.",
+  },
+  {
+    name: "Gina La Rousset",
+    story: "A restaurant owner in Lourdes, France.",
+  },
+] as const;
+
 export const communities = [
   "Bulacan",
   "Leyte",
@@ -96,7 +106,7 @@ export const homePrograms = [
     title: "Cooking For Life Program",
     body: "A three-month intensive, hands-on culinary training program for underprivileged individuals seeking employment in the food and beverage industry, run with CCA Manila.",
     cta: "Sponsor a Batch",
-    href: "/features#cooking-for-life",
+    href: "/about#cooking-for-life",
     image: "/images/program-clp.png",
     alt: "Culinary students in white coats working together in a training kitchen",
     position: "center 30%",
@@ -107,7 +117,7 @@ export const homePrograms = [
     title: "Green Chefmanship Training",
     body: "A sixteen-hour training program developed to promote environmental management in food production, in collaboration with Earth Day Network Philippines.",
     cta: "Learn more",
-    href: "/features#green-chefmanship",
+    href: "/about#green-chefmanship",
     image: "/images/program-green.png",
     alt: "Participants outdoors during Green Chefmanship training",
     position: "center",
@@ -118,7 +128,7 @@ export const homePrograms = [
     title: "The Super Manang Project",
     body: "An outreach livelihood program developing basic culinary skills among women in underserved communities, including fish deboning skills linked to employment opportunities.",
     cta: "Support the program",
-    href: "/features#super-manang",
+    href: "/about#super-manang",
     image: "/images/program-manang.png",
     alt: "Women gathered around a table during a livelihood cooking session",
     position: "center",
@@ -129,7 +139,7 @@ export const homePrograms = [
     title: "The Earth Kitchen",
     body: "A renewable-energy technology project featuring a caramelizer stove, solar-powered food dehydrator, solar dryer for buko shells, and slow-cooking stove.",
     cta: "Explore",
-    href: "/features#earth-kitchen",
+    href: "/about#earth-kitchen",
     image: "/images/program-earth.png",
     alt: "Preserved vegetables, salads, and bottled drinks prepared in the program kitchen",
     position: "center",
@@ -297,7 +307,7 @@ export const events = [
     image: "/images/program-manang.png",
     alt: "Women in a community livelihood session around a shared table",
     position: "center",
-    flip: true,
+    flip: false,
   },
   {
     id: "earth-kitchen",
@@ -310,7 +320,7 @@ export const events = [
     image: "/images/program-earth.png",
     alt: "Jars of preserved vegetables and plated salads from the kitchen program",
     position: "center",
-    flip: false,
+    flip: true,
   },
 ] as const;
 

@@ -5,12 +5,12 @@ import { PeopleRail } from "@/components/people-rail";
 import { events } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Features",
+  title: "About",
   description:
     "Meet the people, programs, and practical work behind CELI’s mission.",
 };
 
-export default function FeaturesPage() {
+export default function AboutPage() {
   return (
     <>
       <section className="relative isolate min-h-[620px] overflow-hidden lg:min-h-[760px]">

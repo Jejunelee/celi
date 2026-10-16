@@ -2,7 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { FacebookVideo } from "@/components/facebook-video";
-import { communities, homePrograms, impactVideos, pillars, stats, timeline } from "@/lib/content";
+import {
+  communities,
+  homePrograms,
+  impactVideos,
+  pillars,
+  stats,
+  successfulScholars,
+  timeline,
+} from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Impact",
@@ -94,6 +102,27 @@ export default function ImpactPage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-sand" aria-labelledby="scholars-heading">
+        <div className="page-wrap py-16 lg:py-24">
+          <p className="text-sm font-bold tracking-[0.12em] text-blue uppercase">Successful scholars</p>
+          <h2
+            id="scholars-heading"
+            className="mt-3 max-w-3xl font-serif text-[clamp(2.1rem,4vw,4rem)] leading-[1.02] tracking-[-0.03em]"
+          >
+            The story of successful scholars.
+          </h2>
+          <ul className="mt-10 grid gap-4 md:grid-cols-2">
+            {successfulScholars.map((scholar, index) => (
+              <li key={scholar.name} className="border border-line bg-white px-6 py-8 sm:px-8 sm:py-10">
+                <p className="text-xs font-bold tracking-[0.16em] text-blue">0{index + 1}</p>
+                <h3 className="mt-3 font-serif text-3xl text-ink sm:text-4xl">{scholar.name}</h3>
+                <p className="mt-4 max-w-md text-lg leading-8 text-stone">{scholar.story}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -195,7 +224,7 @@ export default function ImpactPage() {
             ))}
           </ol>
           <Link
-            href="/features"
+            href="/about#work"
             className="mt-12 inline-flex h-[50px] items-center border border-white px-7 text-sm font-medium tracking-[0.1em] uppercase hover:bg-white hover:text-green-deep"
           >
             Explore our work

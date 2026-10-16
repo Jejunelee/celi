@@ -116,13 +116,6 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              href="/features"
-              className="px-1 py-3 text-base font-medium uppercase tracking-[0.06em]"
-              onClick={() => setOpen(false)}
-            >
-              Features
-            </Link>
-            <Link
               href="/#get-involved"
               className="mt-2 inline-flex h-12 items-center justify-center bg-blue text-sm font-medium uppercase tracking-[0.08em] text-white"
               onClick={() => setOpen(false)}

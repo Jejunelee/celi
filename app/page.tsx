@@ -36,7 +36,7 @@ export default function HomePage() {
             and environmental stewardship.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
-            <Link href="/features" className={primaryBtn}>
+            <Link href="/about#work" className={primaryBtn}>
               Explore our work
             </Link>
             <Link href="/partners" className={ghostBtn}>
@@ -204,7 +204,7 @@ export default function HomePage() {
       <section id="programs" className="scroll-mt-28 bg-white">
         <div className="page-wrap py-16 lg:py-24">
           <p className="text-sm font-bold tracking-[0.12em] text-blue uppercase sm:text-lg">
-            Features
+            Programs
           </p>
           <h2 className="mt-3 max-w-5xl font-serif text-[clamp(2.2rem,4.4vw,4.25rem)] leading-[1.02] tracking-[-0.03em]">
             Programs built around people, food, and the planet.
