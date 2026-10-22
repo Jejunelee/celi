@@ -95,7 +95,7 @@ export function MediaRail({
 
   const status = multiple ? (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-      <p className={`text-[12px] tracking-[0.08em] uppercase ${onDark ? "text-white/75" : "text-stone"}`}>{label}</p>
+      <p className={`text-[12px] tracking-[0.08em] uppercase ${onDark ? "text-white" : "text-stone"}`}>{label}</p>
       <div className="flex items-center" role="group" aria-label={`${label} slides`}>
         {Array.from({ length: count }, (_, slide) => (
           <button
@@ -121,18 +121,22 @@ export function MediaRail({
         ))}
       </div>
       <p
-        className={`text-[12px] tracking-[0.08em] uppercase tabular-nums sm:ml-auto ${onDark ? "text-white/75" : "text-stone"}`}
+        className={`text-[12px] tracking-[0.08em] uppercase tabular-nums sm:ml-auto ${onDark ? "text-white" : "text-stone"}`}
         aria-live="polite"
       >
         {index + 1} of {count}
       </p>
-      {controls === "toolbar" ? <div className="flex gap-2">{buttons}</div> : null}
     </div>
   ) : null;
 
   return (
     <div>
-      {controls === "toolbar" ? <div className="mb-4">{status}</div> : null}
+      {controls === "toolbar" ? (
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <div className="min-w-0 flex-1">{status}</div>
+          <div className="flex gap-2">{buttons}</div>
+        </div>
+      ) : null}
       <div className="relative">
         <div
           ref={rail}

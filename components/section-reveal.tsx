@@ -27,14 +27,32 @@ export function SectionReveal() {
       section.classList.add("reveal");
     }
 
+    const hashId = window.location.hash.slice(1);
+    if (hashId) {
+      document.getElementById(decodeURIComponent(hashId))?.closest("main > section")?.classList.add("is-revealed");
+    }
+
+    const onFocusIn = (event: FocusEvent) => {
+      const section = (event.target as Element | null)?.closest?.("main > section");
+      if (section) section.classList.add("is-revealed");
+    };
+
     reveal();
+    const frame = window.requestAnimationFrame(reveal);
+    const timers = [120, 450, 900].map((delay) => window.setTimeout(reveal, delay));
     window.addEventListener("scroll", reveal, { passive: true });
     document.addEventListener("scroll", reveal, { passive: true });
     window.addEventListener("resize", reveal);
+    window.addEventListener("hashchange", reveal);
+    document.addEventListener("focusin", onFocusIn);
     return () => {
+      window.cancelAnimationFrame(frame);
+      timers.forEach((timer) => window.clearTimeout(timer));
       window.removeEventListener("scroll", reveal);
       document.removeEventListener("scroll", reveal);
       window.removeEventListener("resize", reveal);
+      window.removeEventListener("hashchange", reveal);
+      document.removeEventListener("focusin", onFocusIn);
     };
   }, [pathname]);
 

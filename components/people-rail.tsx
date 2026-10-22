@@ -22,24 +22,24 @@ export function PeopleRail() {
                 style={{ objectPosition: person.position }}
               />
             ) : (
-              <p className="px-6 pb-6 text-sm font-bold tracking-[0.12em] text-stone uppercase">Coming soon</p>
+              <p className="px-6 pb-6 text-sm font-bold tracking-[0.12em] text-ink uppercase">Coming soon</p>
             )}
           </div>
           <div className="flex flex-1 flex-col px-6 py-8 sm:px-8 sm:py-10">
             <p className="text-[10px] font-bold tracking-[0.16em] text-blue">{person.index}</p>
             <h3
-              className={`mt-8 font-display text-[2.15rem] leading-[1.05] font-bold tracking-[-0.03em] sm:mt-auto sm:text-[2.45rem] ${person.nameClass}`}
+              className={`mt-6 font-display text-[2rem] leading-[1.05] font-bold tracking-[-0.03em] sm:text-[2.15rem] ${person.nameClass}`}
             >
               {person.name}
             </h3>
-            {person.comingSoon ? (
-              <p className="mt-4 text-sm font-bold tracking-[0.12em] text-stone uppercase">Coming soon</p>
-            ) : (
-              <>
-                <p className="mt-4 text-sm font-bold tracking-[0.12em] text-ink uppercase">{person.role}</p>
-                <p className="mt-2 max-w-sm text-sm leading-6 text-ink">{person.bio}</p>
-              </>
-            )}
+            <p className="mt-3 text-xs font-bold tracking-[0.12em] text-ink uppercase">{person.role}</p>
+            <ul className="mt-3 max-w-sm space-y-1.5">
+              {person.lines.map((line) => (
+                <li key={line} className="text-sm leading-6 text-ink">
+                  {line}
+                </li>
+              ))}
+            </ul>
           </div>
         </article>
       ))}

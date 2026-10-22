@@ -1,8 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
-import { InquiryForm } from "@/components/inquiry-form";
+import { InquiryForm, InterestShortcuts } from "@/components/inquiry-form";
 import { LogoMarquee } from "@/components/logo-marquee";
-import { email, homePrograms, pillars, stats, timeline } from "@/lib/content";
+import {
+  email,
+  events,
+  homePrograms,
+  mission,
+  phones,
+  pillars,
+  stats,
+  supportOffers,
+  timeline,
+  vision,
+} from "@/lib/content";
+
+function phoneHref(number: string) {
+  const digits = number.replaceAll("-", "");
+  return digits.startsWith("0") ? `tel:+63${digits.slice(1)}` : `tel:+632${digits}`;
+}
 
 const primaryBtn =
   "inline-flex h-[50px] min-w-[220px] items-center justify-center bg-blue px-6 text-[15px] font-medium tracking-[0.06em] text-white uppercase transition-colors hover:bg-[#263a86] lg:min-w-[260px] lg:text-lg";
@@ -51,20 +67,39 @@ export default function HomePage() {
           <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
             <div>
               <p className="text-sm font-bold tracking-[0.12em] uppercase sm:text-lg">About us</p>
-              <h2 className="mt-4 max-w-xl font-serif text-[clamp(2.2rem,4.4vw,4.25rem)] leading-[0.98] tracking-[-0.03em] text-peach">
-                A future where people and planet can thrive together.
+              <h2 className="mt-4 max-w-2xl font-serif text-[clamp(2rem,3.6vw,3.4rem)] leading-[1.05] tracking-[-0.03em] text-peach">
+                A future where lives are transformed, communities flourish and people thrive in
+                harmony with the planet.
               </h2>
             </div>
-            <div className="max-w-3xl text-base leading-8 sm:text-xl sm:leading-9 lg:pt-2 lg:text-2xl lg:leading-9">
+            <div className="max-w-3xl space-y-5 text-base leading-8 sm:text-lg sm:leading-8 lg:pt-2">
               <p>
-                The Culinary Eco-Life, Inc. is a non-stock, non-profit organization founded in
-                September 2001 from the vision of Susana “Annie” Guerrero, a Certified Culinary
-                Professional. CELI was created to provide culinary education to deserving
-                individuals and help them succeed in the food service industry.
+                The Culinary Eco-Life, Inc. (formerly Culinary Education Foundation, Inc.) is a
+                non-stock, non-profit organization. It was the vision of our founder, Ms. Susana
+                “Annie” Guerrero, a Certified Culinary Professional, to be the lead foundation in
+                providing culinary education to deserving individuals to help them succeed in the
+                food service industry.
               </p>
-              <p className="mt-5">
-                Today, its work connects skills development with green food production, sustainable
-                livelihood, and practical environmental technologies.
+              <p>
+                In September 2001, with the help and support of individuals who share the same
+                aspiration, the organization was finally created.
+              </p>
+              <p>
+                Our logo embodies our objective of providing culinary education to those individuals
+                aspiring to build a better future in the culinary industry. We are committed to
+                develop and promote world-class Filipino chefs.
+              </p>
+              <p>
+                CELI operates under the philosophy “Teach them to cook. Feed them for a lifetime.”
+                It empowers underserved Filipinos, including out-of-school youth and women in
+                depressed communities, through free culinary education, green food production
+                training, and job placement. Key initiatives include The Super Manang Project,
+                Cooking for Life, and eco-friendly technologies such as Bokashi composting, a water
+                ozonator, and solar-powered kitchens.
+              </p>
+              <p>
+                We believe that self-sufficiency paves the way for a future filled with opportunities
+                and life-long achievements.
               </p>
               <Link
                 href="/impact"
@@ -131,22 +166,19 @@ export default function HomePage() {
               </h2>
               <div className="mt-6 max-w-3xl space-y-4 text-base leading-8 text-ink sm:text-lg sm:leading-8 lg:text-xl">
                 <p>
-                  Susana Guerrero advocates for community empowerment through lifelong learning,
-                  green practices, and sustainable livelihood which she has built sustainable
-                  communities in Bulacan, Leyte, Agusan del Sur, and Butuan City (Mindanao).
+                  Susana (Annie) P. Guerrero advocates empowering communities through lifelong
+                  learning, green practices, and sustainable livelihood. She has spearheaded the
+                  Cooking for Life Program, a culinary training program with over 700 graduates.
+                  Ninety percent are now working in the F&amp;B industry.
                 </p>
                 <p>
-                  Culinary Eco-Life Inc is a company she founded as a Culinary Training Program
-                  (CTP) with 700+ graduates, 90% employed in F&B. She has coordinated 20,000+ hot
-                  meals for healthcare workers during the pandemic. CELI firmly believes that
-                  self-sufficiency paves the way for a future filled with opportunities and
-                  life-long achievements.
+                  With the scholars of the program, she has provided more than twenty thousand hot
+                  meals to healthcare workers during the pandemic. She has also built sustainable
+                  communities in Bulacan, Leyte, Agusan del Sur, and Butuan City in Mindanao.
                 </p>
                 <p>
-                  CELI warmly introduces current and future scholars with{" "}
-                  <strong>CCA Manila Chefs</strong> who have been training the students to have the
-                  passion and learn the techniques and the ways of a Chef under our Cooking for
-                  Life Program.
+                  Her philosophy is that when you give a hungry man a fish, you feed him for a day,
+                  but if you teach him how to fish, you feed him for a lifetime.
                 </p>
               </div>
             </div>
@@ -169,22 +201,14 @@ export default function HomePage() {
               <p className="text-sm font-bold tracking-[0.12em] uppercase sm:text-lg">Our vision</p>
               <h2
                 id="vision-heading"
-                className="mt-4 max-w-xl font-serif text-[clamp(2.2rem,4.2vw,4.2rem)] leading-[1.02] text-cream"
+                className="mt-4 max-w-xl font-serif text-[clamp(1.8rem,3.2vw,3.1rem)] leading-[1.15] text-cream"
               >
-                A world where people live in harmony with creation.
+                {vision}
               </h2>
             </div>
-            <div className="max-w-2xl space-y-4 text-base leading-8 sm:text-lg lg:text-xl">
-              <p>
-                The Culinary Eco-Life, Inc. is a non-stock, non-profit organization founded in
-                September 2001 from the vision of Susana “Annie” Guerrero, a Certified Culinary
-                Professional. CELI was created to provide culinary education to deserving
-                individuals and help them succeed in the food service industry.
-              </p>
-              <p>
-                Today, its work connects skills development with green food production, sustainable
-                livelihood, and practical environmental technologies.
-              </p>
+            <div className="max-w-2xl">
+              <p className="text-sm font-bold tracking-[0.12em] uppercase sm:text-lg">Our mission</p>
+              <p className="mt-4 text-base leading-8 sm:text-lg lg:text-xl">{mission}</p>
             </div>
           </div>
           <div className="mt-12 border-t border-white/35 pt-8 lg:mt-16">
@@ -211,7 +235,7 @@ export default function HomePage() {
           </h2>
           <div className="mt-10 grid gap-6 lg:grid-cols-2 lg:gap-8">
             {homePrograms.map((program) => (
-              <article key={program.id} className="flex flex-col bg-blue-soft text-white">
+              <article key={program.id} className="flex flex-col bg-blue text-paper">
                 <div className="relative aspect-[2/1]">
                   <Image
                     src={program.image}
@@ -236,42 +260,70 @@ export default function HomePage() {
               </article>
             ))}
           </div>
+          {events
+            .filter((event) => event.id === "green-tech")
+            .map((event) => (
+              <article
+                key={event.id}
+                className="mt-6 border border-line bg-sand px-6 py-8 sm:px-8"
+              >
+                <p className="text-sm font-bold tracking-[0.12em] text-blue uppercase">
+                  Green technology
+                </p>
+                <h3 className="mt-2 font-serif text-3xl text-ink">{event.title}</h3>
+                <div className="mt-4 max-w-3xl space-y-3 text-base leading-7 text-ink">
+                  {event.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+                <Link
+                  href="/about#green-tech"
+                  className="mt-5 inline-flex text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+                >
+                  Learn more →
+                </Link>
+              </article>
+            ))}
         </div>
       </section>
 
       <section className="bg-green text-paper" aria-labelledby="story-heading">
-        <div className="page-wrap py-16 lg:py-24">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
-            <div className="lg:flex lg:flex-col">
-              <p className="text-sm font-bold tracking-[0.12em] uppercase sm:text-lg">Our story</p>
-              <h2
-                id="story-heading"
-                className="mt-4 max-w-xl font-serif text-[clamp(2.2rem,4.2vw,4.2rem)] leading-[1.02] text-cream"
-              >
-                From one vision to a growing network of communities.
-              </h2>
-              <p className="mt-8 max-w-xl text-base leading-8 sm:text-lg lg:mt-auto">
-                CELI&apos;s story connects culinary education with environmental stewardship and
-                sustainable livelihood.
-              </p>
-            </div>
-            <ol>
-              {timeline.map((item, index) => (
-                <li key={item.year} className="relative pb-8 pl-10 last:pb-0">
-                  {index < timeline.length - 1 ? (
-                    <span
-                      aria-hidden
-                      className="absolute top-3 -bottom-3 left-0 w-0.5 -translate-x-1/2 bg-cream"
-                    />
-                  ) : null}
-                  <span className="absolute top-1 left-0 z-10 size-4 -translate-x-1/2 rounded-full border-2 border-cream bg-green" />
-                  <p className="text-sm font-bold tracking-[0.12em] uppercase">{item.year}</p>
-                  <h3 className="mt-1 font-serif text-3xl text-cream">{item.title}</h3>
-                  <p className="mt-2 max-w-xl text-base leading-7 sm:text-lg">{item.body}</p>
-                </li>
-              ))}
-            </ol>
+        <div className="page-wrap py-16 lg:py-20">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold tracking-[0.12em] uppercase sm:text-lg">Our story</p>
+            <h2
+              id="story-heading"
+              className="mt-4 font-serif text-[clamp(2.2rem,4.2vw,4.2rem)] leading-[1.02] text-cream"
+            >
+              From one vision to a growing network of communities.
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-7 sm:text-lg">
+              Approximately 4,000 beneficiaries have come through the CEF/CELI program since
+              2001. They are all cooked for a cause.
+            </p>
           </div>
+          <p className="mt-8 text-sm text-cream/80 md:hidden">Swipe through the years.</p>
+          <ol
+            tabIndex={0}
+            aria-label="Milestones"
+            className="mt-4 flex snap-x gap-4 overflow-x-auto pb-1 focus-visible:outline-offset-4 md:mt-10 md:grid md:grid-cols-2 md:gap-x-12 md:overflow-visible lg:gap-x-16"
+          >
+            {timeline.map((item) => (
+              <li
+                key={item.id}
+                className={`w-[min(82vw,320px)] shrink-0 snap-start border-t border-cream/40 py-4 md:w-auto ${
+                  item.body.length > 240 ? "md:col-span-2" : ""
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="size-2.5 shrink-0 rounded-full border-2 border-cream bg-green" aria-hidden />
+                  <p className="text-xs font-bold tracking-[0.14em] uppercase">{item.year}</p>
+                </div>
+                <h3 className="mt-2 font-serif text-2xl text-cream">{item.title}</h3>
+                <p className="mt-1.5 max-w-xl text-sm leading-6 text-white">{item.body}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -297,7 +349,7 @@ export default function HomePage() {
 
       <section className="bg-blue text-paper" aria-labelledby="sponsors-heading">
         <div className="page-wrap py-16 lg:py-24">
-          <div className="grid gap-8 lg:grid-cols-2 lg:gap-16">
+          <div className="grid items-end gap-8 lg:grid-cols-2 lg:gap-16">
             <div>
               <p className="text-sm font-bold tracking-[0.12em] uppercase sm:text-lg">Sponsors</p>
               <h2
@@ -307,17 +359,70 @@ export default function HomePage() {
                 Support that helps opportunity take root.
               </h2>
             </div>
-            <p className="max-w-xl text-base leading-8 sm:text-lg lg:pt-12">
-              A dedicated recognition space for organizations and individuals supporting CELI&apos;s
-              programs and scholars.
-            </p>
+            <div>
+              <p className="max-w-xl text-base leading-8 sm:text-lg">
+                Organizations and individuals can support CELI&apos;s programs and scholars. Write to
+                us to sponsor the next cohort.
+              </p>
+              <Link
+                href="/#get-involved"
+                className="mt-6 inline-flex h-[50px] items-center justify-center bg-white px-8 text-sm font-medium tracking-[0.08em] text-blue uppercase transition-colors hover:bg-cream sm:text-base"
+              >
+                Become a sponsor
+              </Link>
+            </div>
           </div>
-          <Link
-            href="/#get-involved"
-            className="mt-8 inline-flex h-[72px] items-center justify-center bg-blue-soft px-8 text-base font-bold tracking-[0.08em] text-white uppercase shadow-[0_4px_4px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#6d8fbf] sm:text-lg"
+        </div>
+      </section>
+
+      <section className="bg-sand" aria-labelledby="support-heading">
+        <div className="page-wrap py-16 lg:py-24">
+          <p className="text-sm font-bold tracking-[0.12em] text-blue uppercase">Support the work</p>
+          <h2
+            id="support-heading"
+            className="mt-3 max-w-3xl font-serif text-[clamp(2.1rem,4vw,4rem)] leading-[1.02] tracking-[-0.03em]"
           >
-            Become a sponsor
-          </Link>
+            Every purchase helps support culinary education and scholarships.
+          </h2>
+          <div className="mt-10 grid items-start gap-4 lg:grid-cols-2">
+            {supportOffers.map((offer) => (
+              <article key={offer.title} className="border border-line bg-white px-6 py-8 sm:px-8">
+                <h3 className="font-serif text-3xl text-ink">{offer.title}</h3>
+                <p className="mt-3 text-base leading-7 text-stone">{offer.body}</p>
+                {"prices" in offer ? (
+                  <ul className="mt-5 space-y-2 text-base leading-7 text-ink">
+                    {offer.prices.map((price) => (
+                      <li key={price}>{price}</li>
+                    ))}
+                  </ul>
+                ) : null}
+                <div className="mt-5 flex flex-col gap-2">
+                  {"href" in offer ? (
+                    <a
+                      href={offer.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+                    >
+                      View the e-book
+                    </a>
+                  ) : (
+                    offer.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+                      >
+                        {link.label}
+                      </a>
+                    ))
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -331,12 +436,28 @@ export default function HomePage() {
               Support a scholar, volunteer, explore a partnership, or connect with CELI to learn
               more about its work.
             </p>
+            <p className="mt-8 text-sm font-bold tracking-[0.12em] uppercase">Telephone</p>
+            <p className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-lg">
+              {phones.telephone.map((number) => (
+                <a key={number} href={phoneHref(number)} className="underline-offset-4 hover:underline">
+                  {number}
+                </a>
+              ))}
+            </p>
+            <p className="mt-8 text-sm font-bold tracking-[0.12em] uppercase">Mobile</p>
+            <p className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-lg">
+              {phones.mobile.map((number) => (
+                <a key={number} href={phoneHref(number)} className="underline-offset-4 hover:underline">
+                  {number}
+                </a>
+              ))}
+            </p>
             <p className="mt-8 text-sm font-bold tracking-[0.12em] uppercase">Email</p>
             <a href={`mailto:${email}`} className="mt-1 inline-flex text-lg underline-offset-4 hover:underline sm:text-xl">
               {email}
             </a>
             <p className="mt-8 text-sm font-bold tracking-[0.12em] uppercase">Get involved</p>
-            <p className="mt-1 text-lg">Donate · Volunteer · Partner With Us</p>
+            <InterestShortcuts />
             <p className="mt-8 text-sm font-bold tracking-[0.12em] uppercase">Social</p>
             <a
               href="https://www.facebook.com/CEFPH"
@@ -348,7 +469,7 @@ export default function HomePage() {
             </a>
           </div>
           <InquiryForm />
-        </div>
+    </div>
       </section>
     </>
   );

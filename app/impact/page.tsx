@@ -3,14 +3,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { FacebookVideo } from "@/components/facebook-video";
 import {
+  award,
+  candonDocuments,
+  candonRows,
   communities,
+  graduateRows,
   homePrograms,
   impactVideos,
   pillars,
+  pressReleases,
   stats,
   successfulScholars,
   timeline,
 } from "@/lib/content";
+
+function monogram(name: string) {
+  const words = name.split(/\s+/).filter((word) => /^[A-Za-z]/.test(word) && !["of", "the"].includes(word.toLowerCase()));
+  return words
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+}
 
 export const metadata: Metadata = {
   title: "Impact",
@@ -37,8 +51,9 @@ export default function ImpactPage() {
             Education, ecology, and opportunity.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-paper sm:text-xl">
-            CELI&apos;s story connects culinary education with environmental stewardship and
-            sustainable livelihood — from one vision in 2001 to a growing network of communities.
+            CELI continues its mission to transform lives through culinary education, promote
+            sustainable livelihood, and nurture a deeper care for our planet. Join us in making a
+            difference — one life, one community and one greener future at a time.
           </p>
           <Link
             href="/#get-involved"
@@ -91,14 +106,26 @@ export default function ImpactPage() {
                 </p>
                 <h3 className="mt-2 font-serif text-2xl text-ink sm:text-3xl">{video.title}</h3>
                 <p className="mt-3 max-w-xl text-base leading-7 text-stone">{video.body}</p>
-                <a
-                  href={video.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 inline-flex text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
-                >
-                  Watch on Facebook
-                </a>
+                <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                  <a
+                    href={video.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+                  >
+                    Watch on Facebook
+                  </a>
+                  {video.eyebrow === "24 Oras Weekend" ? (
+                    <a
+                      href="https://www.facebook.com/hashtag/24orasweekend"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+                    >
+                      #24OrasWeekend
+                    </a>
+                  ) : null}
+                </div>
               </article>
             ))}
           </div>
@@ -116,13 +143,176 @@ export default function ImpactPage() {
           </h2>
           <ul className="mt-10 grid gap-4 md:grid-cols-2">
             {successfulScholars.map((scholar, index) => (
-              <li key={scholar.name} className="border border-line bg-white px-6 py-8 sm:px-8 sm:py-10">
-                <p className="text-xs font-bold tracking-[0.16em] text-blue">0{index + 1}</p>
-                <h3 className="mt-3 font-serif text-3xl text-ink sm:text-4xl">{scholar.name}</h3>
-                <p className="mt-4 max-w-md text-lg leading-8 text-stone">{scholar.story}</p>
+              <li key={scholar.name} className="flex h-full gap-4 border border-line bg-white p-5 sm:gap-5 sm:p-6">
+                <div
+                  className={`relative shrink-0 bg-sand ${
+                    scholar.image ? "h-36 w-24 sm:h-40 sm:w-28" : "size-[4.5rem]"
+                  }`}
+                >
+                  {scholar.image ? (
+                    <Image
+                      src={scholar.image}
+                      alt="Filipino Pride: JM Sto. Domingo honored for his work as a chef in Dubai"
+                      fill
+                      sizes="112px"
+                      className="object-contain"
+                    />
+                  ) : (
+                    <span className="flex size-full items-center justify-center font-serif text-xl text-green">
+                      {monogram(scholar.name)}
+                    </span>
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[10px] font-bold tracking-[0.16em] text-blue">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="mt-1 font-serif text-2xl leading-tight text-ink">{scholar.name}</h3>
+                  {scholar.detail ? (
+                    <p className="mt-1.5 text-xs font-bold tracking-[0.08em] text-blue uppercase">
+                      {scholar.detail}
+                    </p>
+                  ) : null}
+                  {scholar.story ? (
+                    <p className="mt-2 text-sm leading-6 text-stone">{scholar.story}</p>
+                  ) : null}
+                  {"href" in scholar && scholar.href ? (
+                    <a
+                      href={scholar.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 inline-flex text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+                    >
+                      {scholar.linkLabel}
+                    </a>
+                  ) : null}
+                </div>
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section className="bg-white" aria-labelledby="graduates-heading">
+        <div className="page-wrap py-16 lg:py-24">
+          <p className="text-sm font-bold tracking-[0.12em] text-blue uppercase">Number of graduates</p>
+          <h2
+            id="graduates-heading"
+            className="mt-3 max-w-3xl font-serif text-[clamp(2.1rem,4vw,4rem)] leading-[1.02] tracking-[-0.03em]"
+          >
+            Every batch, from 2013 to 2026.
+          </h2>
+          <p className="mt-4 text-sm text-stone sm:hidden">Swipe sideways to read every column.</p>
+          <div className="mt-8 overflow-x-auto" tabIndex={0} aria-label="Graduate batches">
+            <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+              <caption className="sr-only">
+                Cooking For Life graduates by year, program, and batch. Total 857 scholars.
+              </caption>
+              <thead>
+                <tr className="bg-green text-cream">
+                  <th className="px-4 py-3 font-medium">Year</th>
+                  <th className="px-4 py-3 font-medium">CLP-Katipunan</th>
+                  <th className="px-4 py-3 font-medium">CLP-Candon</th>
+                  <th className="px-4 py-3 font-medium">CLP-Rotary</th>
+                  <th className="px-4 py-3 text-right font-medium">Scholars</th>
+                </tr>
+              </thead>
+              <tbody>
+                {graduateRows.map((row, index) => (
+                  <tr key={`${row.year}-${row.katipunan}-${row.candon}-${row.rotary}`} className={index % 2 ? "bg-sand" : "bg-white"}>
+                    <th className="px-4 py-3 font-medium text-ink">{row.year}</th>
+                    <td className="px-4 py-3 text-stone">{row.katipunan}</td>
+                    <td className="px-4 py-3 text-stone">{row.candon}</td>
+                    <td className="px-4 py-3 text-stone">{row.rotary}</td>
+                    <td className="px-4 py-3 text-right font-medium text-ink">{row.scholars}</td>
+                  </tr>
+                ))}
+                <tr className="bg-green-deep text-cream">
+                  <th className="px-4 py-3 font-medium" colSpan={4}>Total</th>
+                  <td className="px-4 py-3 text-right font-medium">857</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 className="mt-14 font-serif text-3xl text-ink">Our longest collaboration with the City Government of Candon</h3>
+          <div className="mt-6 max-w-xl overflow-x-auto" tabIndex={0} aria-label="Candon scholarship batches">
+            <table className="w-full min-w-[320px] border-collapse text-left text-sm">
+              <caption className="sr-only">Candon scholarship batches. Total 250 scholars.</caption>
+              <thead>
+                <tr className="bg-[#314AA2] text-white">
+                  <th className="px-4 py-3 font-medium">Year</th>
+                  <th className="px-4 py-3 font-medium">Batch</th>
+                  <th className="px-4 py-3 text-right font-medium">Scholars</th>
+                </tr>
+              </thead>
+              <tbody>
+                {candonRows.map((row, index) => (
+                  <tr key={row.year} className={index % 2 ? "bg-sand" : "bg-white"}>
+                    <th className="px-4 py-3 font-medium text-ink">{row.year}</th>
+                    <td className="px-4 py-3 text-stone">{row.batch}</td>
+                    <td className="px-4 py-3 text-right font-medium text-ink">{row.scholars}</td>
+                  </tr>
+                ))}
+                <tr className="bg-[#314AA2] text-white">
+                  <th className="px-4 py-3 font-medium" colSpan={2}>Total</th>
+                  <td className="px-4 py-3 text-right font-medium">250</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul className="mt-6 flex flex-col gap-3">
+            {candonDocuments.map((document) => (
+              <li key={document.href}>
+                <a
+                  href={document.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+                >
+                  {document.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="bg-ecru" aria-labelledby="recognition-heading">
+        <div className="page-wrap py-16 lg:py-24">
+          <p className="text-sm font-bold tracking-[0.12em] text-blue uppercase">Awards & recognition</p>
+          <h2
+            id="recognition-heading"
+            className="mt-3 max-w-3xl font-serif text-[clamp(2.1rem,4vw,4rem)] leading-[1.02] tracking-[-0.03em]"
+          >
+            Noted for the work, and in the press.
+          </h2>
+          <article className="mt-8 flex flex-col gap-4 border border-line bg-white px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-8">
+            <div>
+              <h3 className="font-serif text-2xl text-ink sm:text-3xl">{award.title}</h3>
+              <p className="mt-2 text-base leading-7 text-stone">{award.body}</p>
+            </div>
+            <a
+              href={award.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+            >
+              Read the citation
+            </a>
+          </article>
+          <p className="mt-12 text-sm font-bold tracking-[0.12em] text-blue uppercase">Press releases</p>
+          <ol className="mt-4 grid md:grid-cols-2 md:gap-x-12">
+            {pressReleases.map((item, index) => (
+              <li key={item.title} className="border-t border-line py-4">
+                <p className="text-xs font-bold tracking-[0.14em] text-blue">
+                  {String(index + 1).padStart(2, "0")} · {item.outlet}
+                </p>
+                <p className="mt-1 font-serif text-xl leading-snug text-ink">{item.title}</p>
+                <p className="mt-1 text-sm text-stone">{item.date}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -214,12 +404,22 @@ export default function ImpactPage() {
           <h2 className="font-serif text-[clamp(2.1rem,4vw,3.8rem)] text-cream">
             From one vision to a growing network.
           </h2>
-          <ol className="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+          <p className="mt-8 text-sm text-cream/80 sm:hidden">Swipe through the years.</p>
+          <ol
+            tabIndex={0}
+            aria-label="Milestones"
+            className="mt-4 flex snap-x gap-4 overflow-x-auto pb-1 focus-visible:outline-offset-4 sm:mt-10 sm:grid sm:grid-cols-2 sm:gap-x-10 sm:gap-y-8 sm:overflow-visible"
+          >
             {timeline.map((item) => (
-              <li key={item.year} className="border-t border-white/25 pt-5">
-                <p className="text-sm font-bold tracking-[0.14em] text-peach uppercase">{item.year}</p>
-                <h3 className="mt-2 font-serif text-2xl text-cream">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/80">{item.body}</p>
+              <li
+                key={item.id}
+                className={`w-[min(78vw,260px)] shrink-0 snap-start border-t border-white/25 pt-4 sm:w-auto ${
+                  item.body.length > 240 ? "sm:col-span-2" : ""
+                }`}
+              >
+                <p className="text-xs font-bold tracking-[0.14em] text-peach uppercase">{item.year}</p>
+                <h3 className="mt-2 font-serif text-xl leading-snug text-cream">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-white">{item.body}</p>
               </li>
             ))}
           </ol>

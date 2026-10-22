@@ -14,6 +14,31 @@ const interests = [
 
 const initialState: InquiryState = { status: "idle" };
 
+const shortcuts = ["Donate", "Volunteer", "Partner with us"] as const;
+
+export function InterestShortcuts() {
+  return (
+    <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-2 text-lg">
+      {shortcuts.map((option) => (
+        <li key={option}>
+          <button
+            type="button"
+            className="underline-offset-4 hover:underline"
+            onClick={() => {
+              const select = document.querySelector<HTMLSelectElement>("#inquiry-interest");
+              if (select) select.value = option;
+              document.getElementById("inquiry")?.scrollIntoView({ block: "nearest" });
+              select?.focus();
+            }}
+          >
+            {option}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function InquiryForm() {
   const [state, action, pending] = useActionState(sendInquiry, initialState);
 
@@ -38,7 +63,7 @@ export function InquiryForm() {
   return (
     <form
       action={action}
-      noValidate
+      id="inquiry"
       className="rounded-[28px] border border-line bg-white px-5 py-6 text-ink sm:px-8 sm:py-8"
     >
       <div className="grid gap-4 sm:grid-cols-2">
@@ -56,7 +81,7 @@ export function InquiryForm() {
             className="mt-2 h-14 w-full rounded-[13px] border border-line bg-field px-3.5 text-base text-ink placeholder:text-[#757575] focus-visible:border-blue"
           />
           {state.fieldErrors?.name ? (
-            <span id="name-error" className="mt-1 block text-sm text-blue">
+            <span id="name-error" className="mt-1 block text-sm text-[#8a2e2e]">
               {state.fieldErrors.name}
             </span>
           ) : null}
@@ -76,7 +101,7 @@ export function InquiryForm() {
             className="mt-2 h-14 w-full rounded-[13px] border border-line bg-field px-3.5 text-base text-ink placeholder:text-[#757575] focus-visible:border-blue"
           />
           {state.fieldErrors?.email ? (
-            <span id="email-error" className="mt-1 block text-sm text-blue">
+            <span id="email-error" className="mt-1 block text-sm text-[#8a2e2e]">
               {state.fieldErrors.email}
             </span>
           ) : null}
@@ -87,9 +112,10 @@ export function InquiryForm() {
           </span>
           <span className="relative mt-2 block">
             <select
+              id="inquiry-interest"
               name="interest"
               defaultValue="General inquiry"
-              className="h-12 w-full appearance-none rounded-[13px] border border-line bg-field px-4 pr-10 text-base text-ink focus-visible:border-blue"
+              className="h-14 w-full appearance-none rounded-[13px] border border-line bg-field px-4 pr-10 text-base text-ink focus-visible:border-blue"
             >
               {interests.map((option) => (
                 <option key={option}>{option}</option>
@@ -115,20 +141,21 @@ export function InquiryForm() {
             className="mt-2 min-h-36 w-full resize-y rounded-[13px] border border-line bg-field px-3.5 py-3 text-base text-ink placeholder:text-[#757575] focus-visible:border-blue"
           />
           {state.fieldErrors?.message ? (
-            <span id="message-error" className="mt-1 block text-sm text-blue">
+            <span id="message-error" className="mt-1 block text-sm text-[#8a2e2e]">
               {state.fieldErrors.message}
             </span>
           ) : null}
         </label>
       </div>
       {state.message ? (
-        <p className="mt-4 text-sm leading-6 text-blue" role="alert">
+        <p className="mt-4 text-sm leading-6 text-[#8a2e2e]" role="alert">
           {state.message}
         </p>
       ) : null}
       <button
         type="submit"
         disabled={pending}
+        aria-busy={pending}
         className="mt-5 inline-flex items-center justify-center rounded-full border border-everglade bg-everglade px-5 py-3 font-form text-[13px] font-bold text-white transition-colors hover:bg-green-deep disabled:opacity-60"
       >
         {pending ? "Sending…" : "Send Inquiry →"}

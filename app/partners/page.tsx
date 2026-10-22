@@ -61,8 +61,8 @@ export default function PartnersPage() {
             <span className="font-bold text-purpose italic">purpose.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-[15px] leading-7 text-stone">
-            Our commitment to culinary education and environmental stewardship is carried out in
-            partnership with organizations who share this mission.
+            To fulfill our commitment of providing culinary education and environmental stewardship,
+            we partner with the following organizations.
           </p>
           <ul className="mt-12 flex flex-wrap items-center justify-center gap-3 border-y border-ink/10 py-8">
             {chips.map((chip) => (
@@ -88,7 +88,7 @@ export default function PartnersPage() {
               id={partner.id}
               className={`scroll-mt-28 ${surface.bg}`}
             >
-              <div className="page-wrap grid items-center gap-10 py-14 lg:grid-cols-2 lg:gap-16 lg:py-20">
+              <div className="page-wrap grid items-start gap-10 py-14 lg:grid-cols-2 lg:gap-16 lg:py-20">
                 <div className={partner.flip ? "lg:order-2" : ""}>
                   <div className="flex flex-wrap items-center gap-4">
                     <img
@@ -122,13 +122,15 @@ export default function PartnersPage() {
                   >
                     {partner.headline}
                   </h3>
-                  <p
-                    className={`mt-4 max-w-lg text-[15px] leading-7 ${
-                      surface.onDark ? "text-white/80" : "text-stone"
+                  <div
+                    className={`mt-4 max-w-xl space-y-4 text-[15px] leading-7 ${
+                      surface.onDark ? "text-white" : "text-ink"
                     }`}
                   >
-                    {partner.body}
-                  </p>
+                    {partner.body.split("\n\n").map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
                   <p
                     className={`mt-6 inline-flex h-9 items-center border px-4 text-[12px] font-bold tracking-[0.08em] uppercase ${
                       surface.onDark ? "border-white/40 text-white" : "border-[#c8cec9] text-ink"

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PeopleRail } from "@/components/people-rail";
-import { events } from "@/lib/content";
+import { events, founderLinks, ourStory, programDocuments, spgBooks } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -87,10 +87,79 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="bg-white" aria-labelledby="story-heading">
+        <div className="page-wrap py-16 lg:py-24">
+          <p className="text-[13px] font-bold tracking-[0.18em] text-blue uppercase">Our story</p>
+          <h2
+            id="story-heading"
+            className="mt-3 max-w-3xl font-display text-[clamp(2.2rem,4.4vw,4.2rem)] leading-[1.02] font-semibold tracking-[-0.04em] text-green-deep"
+          >
+            They are all cooked for a cause.
+          </h2>
+          <div className="mt-8 max-w-3xl space-y-4 text-base leading-8 text-stone sm:text-lg">
+            {ourStory.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+          <ul className="mt-8 flex flex-col gap-3">
+            {founderLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <h3 className="mt-12 font-display text-3xl font-semibold tracking-[-0.03em] text-green-deep">
+            SPG Books
+          </h3>
+          <ul className="mt-6 grid gap-8 sm:grid-cols-3 sm:gap-6">
+            {spgBooks.map((book) => {
+              const cover = (
+                <Image
+                  src={book.image}
+                  alt={`${book.title}, by ${book.author}`}
+                  width={book.width}
+                  height={book.height}
+                  className="h-64 w-auto border border-line bg-white object-contain"
+                  style={{ width: "auto", height: "16rem" }}
+                />
+              );
+              return (
+                <li key={book.title}>
+                  <figure>
+                    {cover}
+                    <figcaption className="mt-3 max-w-[16rem] text-sm font-medium leading-6 text-ink">
+                      {book.title}
+                    </figcaption>
+                    <p className="text-sm text-stone">{book.author}</p>
+                    {"href" in book ? (
+                      <a
+                        href={book.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+                      >
+                        Read the e-book
+                      </a>
+                    ) : null}
+                  </figure>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+
       <section id="people" className="scroll-mt-28 bg-sand">
         <div className="page-wrap py-16 lg:py-24">
           <p className="text-[13px] font-bold tracking-[0.18em] text-blue uppercase">
-            The people behind CELI
+            Board of Trustees
           </p>
           <h2 className="mt-3 max-w-3xl font-display text-[clamp(2.4rem,5vw,4.4rem)] leading-[0.98] font-semibold tracking-[-0.04em] text-green-deep">
             Meet the people behind the plate.
@@ -103,21 +172,23 @@ export default function AboutPage() {
 
       <section id="work" className="scroll-mt-28 bg-blue text-white">
         <div className="page-wrap py-16 lg:py-24">
-          <p className="text-[11px] font-bold tracking-[0.18em] text-white/70 uppercase">
+          <p className="text-[11px] font-bold tracking-[0.18em] text-cream uppercase">
             Our work in action
           </p>
           <h2 className="mt-3 max-w-xl font-display text-[clamp(2.6rem,5.4vw,5rem)] leading-[0.95] font-bold tracking-[-0.04em]">
-            Events we are proud of
+            Programs we are proud of
           </h2>
           <div className="mt-12 space-y-16 lg:mt-16 lg:space-y-24">
             {events.map((event) => (
               <article
                 key={event.id}
                 id={event.id}
-                className="scroll-mt-28 grid items-center gap-8 lg:grid-cols-2 lg:gap-14"
+                className={`scroll-mt-28 items-center gap-8 ${
+                  event.image ? "grid lg:grid-cols-2 lg:gap-14" : "border-t border-white/25 pt-2"
+                }`}
               >
-                <div className={`relative aspect-[575/450] bg-sage ${event.flip ? "lg:order-2" : ""}`}>
-                  {event.image ? (
+                {event.image ? (
+                  <div className={`relative aspect-[575/450] bg-sage ${event.flip ? "lg:order-2" : ""}`}>
                     <Image
                       src={event.image}
                       alt={event.alt}
@@ -126,20 +197,27 @@ export default function AboutPage() {
                       className="object-cover"
                       style={{ objectPosition: event.position }}
                     />
-                  ) : null}
-                  <span className="pointer-events-none absolute right-4 bottom-4 size-14 border border-white/55 sm:size-[72px]" aria-hidden />
-                </div>
+                    <span className="pointer-events-none absolute right-4 bottom-4 size-14 border border-white/55 sm:size-[72px]" aria-hidden />
+                  </div>
+                ) : null}
                 <div>
-                  <p className="text-[11px] font-bold tracking-[0.16em] text-white/60 uppercase">
+                  <p className="text-[11px] font-bold tracking-[0.16em] text-cream uppercase">
                     {event.kicker}
                   </p>
                   <h3 className="mt-3 font-display text-[clamp(2rem,3.4vw,3.5rem)] leading-[1.02] font-bold tracking-[-0.03em]">
                     {event.title}
                   </h3>
-                  <div className="mt-5 space-y-4 text-sm leading-7 text-white/80 sm:text-[15px]">
+                  <div className="mt-5 space-y-4 text-sm leading-7 text-white sm:text-[15px]">
                     {event.paragraphs.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
+                    {"points" in event ? (
+                      <ul className="list-disc space-y-2 pl-5">
+                        {event.points.map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
+                      </ul>
+                    ) : null}
                   </div>
                   <Link
                     href="/#get-involved"
@@ -151,6 +229,29 @@ export default function AboutPage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="page-wrap py-16 lg:py-20">
+          <p className="text-[13px] font-bold tracking-[0.18em] text-blue uppercase">Documents</p>
+          <h2 className="mt-3 max-w-xl font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] font-semibold tracking-[-0.03em] text-green-deep">
+            Read the programs in full.
+          </h2>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+            {programDocuments.map((document) => (
+              <li key={document.href}>
+                <a
+                  href={document.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-h-16 items-center border border-line px-5 py-4 text-sm font-medium tracking-[0.06em] text-ink uppercase underline-offset-4 hover:border-blue hover:text-blue"
+                >
+                  {document.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </>
