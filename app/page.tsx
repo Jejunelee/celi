@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { InquiryForm, InterestShortcuts } from "@/components/inquiry-form";
 import { LogoMarquee } from "@/components/logo-marquee";
+import { StoryTimeline } from "@/components/story-timeline";
 import {
   email,
   events,
@@ -11,7 +12,6 @@ import {
   pillars,
   stats,
   supportOffers,
-  timeline,
   vision,
 } from "@/lib/content";
 
@@ -302,28 +302,7 @@ export default function HomePage() {
               2001. They are all cooked for a cause.
             </p>
           </div>
-          <p className="mt-8 text-sm text-cream/80 md:hidden">Swipe through the years.</p>
-          <ol
-            tabIndex={0}
-            aria-label="Milestones"
-            className="mt-4 flex snap-x gap-4 overflow-x-auto pb-1 focus-visible:outline-offset-4 md:mt-10 md:grid md:grid-cols-2 md:gap-x-12 md:overflow-visible lg:gap-x-16"
-          >
-            {timeline.map((item) => (
-              <li
-                key={item.id}
-                className={`w-[min(82vw,320px)] shrink-0 snap-start border-t border-cream/40 py-4 md:w-auto ${
-                  item.body.length > 240 ? "md:col-span-2" : ""
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="size-2.5 shrink-0 rounded-full border-2 border-cream bg-green" aria-hidden />
-                  <p className="text-xs font-bold tracking-[0.14em] uppercase">{item.year}</p>
-                </div>
-                <h3 className="mt-2 font-serif text-2xl text-cream">{item.title}</h3>
-                <p className="mt-1.5 max-w-xl text-sm leading-6 text-white">{item.body}</p>
-              </li>
-            ))}
-          </ol>
+          <StoryTimeline tone="green" idPrefix="home" />
         </div>
       </section>
 
@@ -400,8 +379,6 @@ export default function HomePage() {
                   {"href" in offer ? (
                     <a
                       href={offer.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
                     >
                       View the e-book

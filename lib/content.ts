@@ -114,6 +114,8 @@ export const successfulScholars = [
     detail: "CLP Batch 9, 2015",
     story: "A deaf chef honored abroad. Jesus Miguel A. Sto. Domingo, a Filipino chef and Demi Chef de Partie, with eight years in Dubai.",
     image: "/images/scholar-jm-poster.png",
+    imageAlt: "Filipino Pride: JM Sto. Domingo honored for his work as a chef in Dubai",
+    imageFit: "contain",
   },
   {
     name: "Philip Brandon Makil",
@@ -145,7 +147,9 @@ export const successfulScholars = [
     name: "Gina Lat Rousset",
     detail: "CLP Batch 2016",
     story: "A restaurant owner in Lourdes, France.",
-    image: null,
+    image: "/images/scholar-gina.jpg",
+    imageAlt: "Gina Lat Rousset in her restaurant kitchen, a Cooking For Life graduate",
+    imageFit: "cover",
   },
 ] as const;
 
@@ -194,9 +198,9 @@ export const homePrograms = [
     body: "A sixteen-hour training program developed to promote environmental management in food production, in collaboration with Earth Day Network Philippines.",
     cta: "Learn more",
     href: "/about#green-chefmanship",
-    image: "/images/program-green.png",
-    alt: "Participants outdoors during Green Chefmanship training",
-    position: "center",
+    image: "/images/green-chef-class.jpg",
+    alt: "A chef instructing students at a Green Chefmanship kitchen class",
+    position: "center 30%",
   },
   {
     id: "super-manang",
@@ -216,9 +220,9 @@ export const homePrograms = [
     body: "A renewable-energy technology project featuring a caramelizer stove, solar-powered food dehydrator, solar dryer for buko shells, and slow-cooking stove.",
     cta: "Explore",
     href: "/about#earth-kitchen",
-    image: "/images/program-earth.png",
-    alt: "Preserved vegetables, salads, and bottled drinks prepared in the program kitchen",
-    position: "center",
+    image: "/images/earth-kitchen-stove.jpg",
+    alt: "A chef beside a brick stove at the Earth Kitchen",
+    position: "center 30%",
   },
 ] as const;
 
@@ -273,7 +277,8 @@ export const people = [
     name: "Susana P. Guerrero",
     role: "President & Founder",
     lines: [
-      "CCP Emeritus.",
+      "CCP Emeritus. First Filipina Certified Culinary Professional, IACP, 1999.",
+      "First Asian awardee of the Antonin Careme Society, 2015.",
       "She advocates lifelong learning, green practices, and sustainable livelihood, and has built this work in Bulacan, Leyte, Agusan del Sur, and Butuan City.",
     ],
     image: "/images/person-annie.png",
@@ -292,11 +297,11 @@ export const people = [
       "Former Quality Assurance Officer, Artstream Hospitality Management Group, Inc.",
       "Pursuing a Master of Science in Culinary Arts.",
     ],
-    image: null,
-    alt: "",
+    image: "/images/person-kat.jpg",
+    alt: "Catherine Ruth S. Catapia, chef instructor at CCA Manila",
     nameClass: "text-ink",
-    position: "center",
-    comingSoon: true,
+    position: "center 20%",
+    comingSoon: false,
   },
   {
     index: "03 / 07",
@@ -308,11 +313,11 @@ export const people = [
       "Chef Instructor, CCA Manila and the Asian School of Hospitality Arts (ASHA).",
       "Currently operating a home catering service.",
     ],
-    image: null,
-    alt: "",
+    image: "/images/person-martin.jpg",
+    alt: "Juan Martin N. del Prado in the CCA kitchen",
     nameClass: "text-ink",
-    position: "center",
-    comingSoon: true,
+    position: "center 18%",
+    comingSoon: false,
   },
   {
     index: "04 / 07",
@@ -324,11 +329,11 @@ export const people = [
       "A spiritual minister and environmentalist.",
       "A mentor in Nonviolent Communication (NVC), fostering understanding and compassion.",
     ],
-    image: null,
-    alt: "",
+    image: "/images/person-richie.jpg",
+    alt: "Rev. Fr. Rolie Richie Gomez",
     nameClass: "text-ink",
-    position: "center",
-    comingSoon: true,
+    position: "center 12%",
+    comingSoon: false,
   },
   {
     index: "05 / 07",
@@ -340,11 +345,11 @@ export const people = [
       "PRC Registered Nutritionist-Dietitian.",
       "A respected educator and leader in Philippine culinary and nutrition.",
     ],
-    image: null,
-    alt: "",
+    image: "/images/person-veritas.jpg",
+    alt: "Ma. Veritas F. Luna",
     nameClass: "text-ink",
-    position: "center",
-    comingSoon: true,
+    position: "center 18%",
+    comingSoon: false,
   },
   {
     index: "06 / 07",
@@ -355,11 +360,11 @@ export const people = [
       "Former Program Manager, ASHA.",
       "Pursuing a Master of Science in HRM.",
     ],
-    image: null,
-    alt: "",
+    image: "/images/person-marcial.jpg",
+    alt: "Marcial C. Pimentel III",
     nameClass: "text-ink",
-    position: "center",
-    comingSoon: true,
+    position: "center 15%",
+    comingSoon: false,
   },
   {
     index: "07 / 07",
@@ -399,9 +404,24 @@ export const events = [
       "A sixteen-hour training program developed to promote environmental management in food production. This is a collaboration and shared mission with the Earth Day Network Philippines.",
       "Green Chefmanship is 80 percent attitude. Simple things, such as making sure you are using a blue flame in cooking, or making the effort to peel and slice carefully, help reduce the volume of waste. Proper preparation and cooking, and correct portioning of the food that is served, translate to the least wastage. Even this is not rendered useless, as it is given to hog raisers for feed. By rigorously segregating recyclable bottles and tins and cutting down the use of plastic packaging, residual waste is greatly reduced.",
     ],
-    image: "/images/event-green.png",
-    alt: "Chefs preparing food together during Green Chefmanship training",
-    position: "center 40%",
+    links: [
+      { label: "Read the environmental pledge", href: "/documents/green-chefmanship-pledge.pdf" },
+    ],
+    image: "/images/green-chef-class.jpg",
+    alt: "A chef instructing students at a Green Chefmanship kitchen class",
+    position: "center 30%",
+    images: [
+      {
+        src: "/images/green-chef-class.jpg",
+        alt: "A chef instructing students at a Green Chefmanship kitchen class",
+        position: "center 30%",
+      },
+      {
+        src: "/images/green-chef-cca.jpg",
+        alt: "The Center for Culinary Arts, Manila kitchen facility",
+        position: "center",
+      },
+    ],
     flip: true,
   },
   {
@@ -411,10 +431,13 @@ export const events = [
     paragraphs: [
       "Ozonation technology uses a low-cost, low-technology, custom-made ozonator.",
       "Ozonation of air removes airborne contaminants, enriches the oxygen, and aids in pest control. Ozonation of water produces highly oxygenated, pH 8 alkaline water, and treats wastewater.",
+      "The water ozonator is portable and chemical-free. It sterilizes food preparation, utensils, and drinking water, and the work earned an ISO 14001 certification for 2013–2017.",
     ],
-    image: null,
-    alt: "",
+    links: [{ label: "View the water ozonator flyer", href: "/documents/water-ozonator-flyer.pdf" }],
+    image: "/images/flyer-ozonator.jpg",
+    alt: "Water ozonator flyer for Culinary Eco-Life",
     position: "center",
+    fit: "contain",
     flip: false,
   },
   {
@@ -442,9 +465,11 @@ export const events = [
       "The Earth Kitchen houses the caramelizer stove, solar-powered food dehydrator, and slow-cooking stove. An appropriate technology on renewable energy systems.",
       "The Earth Kitchen completed last April 22, 2016 has already shown great potential of reducing energy consumption. The Earth Kitchen houses the caramelizer stove, solar-powered food dehydrator, solar drier for buko shells and the slow cooking stove.",
     ],
-    image: "/images/program-earth.png",
-    alt: "Jars of preserved vegetables and plated salads from the kitchen program",
-    position: "center",
+    image: "/images/earth-kitchen-building.jpg",
+    alt: "The Earth Kitchen building, with its name painted in leaves beside the door",
+    position: "center top",
+    fit: "contain",
+    frame: "3/4",
     flip: true,
   },
 ] as const;
@@ -471,6 +496,11 @@ export const partners = [
     tag: "Culinary Education",
     flip: false,
     images: [
+      {
+        src: "/images/spg-class.jpg",
+        alt: "Susana Guerrero teaching a Cooking For Life scholar to prepare vegetables",
+        position: "center 40%",
+      },
       {
         src: "/images/partner-cca-kitchen.png",
         alt: "CCA Manila chefs and trainees with a finished meal",
@@ -536,6 +566,21 @@ export const partners = [
         alt: "Cooking For Life graduation ceremony at Candon Civic Center",
         position: "center 30%",
       },
+      {
+        src: "/images/partner-candon-mayor.jpg",
+        alt: "Mayor Eric Singson greeting a Cooking For Life graduate in Candon",
+        position: "center",
+      },
+      {
+        src: "/images/partner-candon-group.jpg",
+        alt: "Candon City officials and chefs at a Cooking For Life graduation",
+        position: "center",
+      },
+      {
+        src: "/images/partner-candon-opening.jpg",
+        alt: "Opening ceremony for a Candon City Cooking For Life batch",
+        position: "center",
+      },
     ] satisfies GalleryImage[],
   },
   {
@@ -553,14 +598,20 @@ export const partners = [
     flip: false,
     images: [
       {
-        src: "/images/partner-zero-waste-visit.png",
-        alt: "Zero Waste Philippines partners during a community visit",
+        src: "/images/partner-zw-group.jpg",
+        alt: "Zero Waste Philippines members together on an outdoor stair",
         position: "center",
       },
       {
-        src: "/images/partner-zero-waste-talk.png",
-        alt: "A presentation on the Eco Center urban permaculture site",
+        src: "/images/partner-zw-advocacy.jpg",
+        alt: "Susana Guerrero with advocates holding A Pinch of Love, A Cupful of Passion",
         position: "center",
+      },
+      {
+        src: "/images/bokashi-brochure.jpg",
+        alt: "Bokashi brochure on how to use bran, juice, and fermented waste",
+        position: "center",
+        fit: "contain",
       },
     ] satisfies GalleryImage[],
   },
@@ -579,6 +630,11 @@ export const partners = [
     flip: true,
     images: [
       {
+        src: "/images/partner-earth-zbo.jpg",
+        alt: "Earth Day Network partners at the Zero Basura Olympics",
+        position: "center",
+      },
+      {
         src: "/images/partner-earth-day-ceremony.png",
         alt: "A blessing during an Earth Day Network gathering",
         position: "center top",
@@ -589,13 +645,13 @@ export const partners = [
         position: "center",
       },
       {
-        src: "/images/event-green.png",
-        alt: "Chefs training through the Green Chefmanship program",
-        position: "center 35%",
+        src: "/images/green-chef-class.jpg",
+        alt: "A chef instructing students at a Green Chefmanship kitchen class",
+        position: "center 30%",
       },
       {
-        src: "/images/program-green.png",
-        alt: "Outdoor session of the Green Chefmanship training",
+        src: "/images/green-chef-cca.jpg",
+        alt: "The Center for Culinary Arts, Manila kitchen facility",
         position: "center",
       },
     ] satisfies GalleryImage[],
@@ -645,6 +701,16 @@ export const partners = [
         alt: "A chef preparing food during a Rotary Club partnership training",
         position: "center top",
       },
+      {
+        src: "/images/partner-rotary-2026.jpg",
+        alt: "The 2026 Cooking For Life Rotary batch with Susana P. Guerrero",
+        position: "center",
+      },
+      {
+        src: "/images/partner-rotary-signing.jpg",
+        alt: "Rotary Club of Sto. Domingo and Culinary Eco-Life signing a partnership",
+        position: "center",
+      },
     ] satisfies GalleryImage[],
   },
 ] as const;
@@ -659,7 +725,7 @@ export const ourStory = [
   "Since the founding of Culinary Education Foundation (CEF) in September 2001, it has evolved into a leading foundation in the hospitality industry. It has earned the respect and support of partner individuals, companies, funding institutions, and NGOs who share the aspiration for which the foundation was created.",
   "CEF has been the beneficiary of organizations here and abroad: the World Bank’s Bagong Paraan, the Canadian International Development Agency (CIDA) Culinary Training Program, AUSAID of Australia, the Mobile Kitchen Project with AI-HU of Taiwan, a USDA Grant, and DEG of Germany. Locally: Nestlé’s Maggi, Jelly Ace, the CDO Grant, the Department of Tourism, which partnered with CEF for two years in the Manila Food and Wine Festival, and Candon City, Ilocos Sur, which has been supporting scholars from 2010 to the present.",
   "Registered as Culinary Eco-Life, Inc. (CELI) in 2024, CELI enjoys the support of private individuals who sponsor deserving scholars, and of accomplished chefs who volunteer as instructors for the Cooking for Life Program. CELI takes pride in programs that have provided for the welfare of thousands of beneficiaries.",
-  "To date, there are approximately 4,000 beneficiaries under the CEF/CELI program since its founding in 2001. They are all cooked for a cause.",
+  "To date, there are approximately 4,000 beneficiaries under the CEF/CELI program since its founding in 2001. They all cooked for a cause.",
 ] as const;
 
 export const phones = {
@@ -682,7 +748,11 @@ export const programDocuments = [
   },
   {
     label: "CELI flyer",
-    href: "https://drive.google.com/file/d/1vLBQ0xZQV2TaSNkV6xv7bkF7KWhQbHE_/view",
+    href: "/images/flyer-celi.jpg",
+  },
+  {
+    label: "CELI–CEPAGCO programs",
+    href: "/documents/celi-cepagco-programs.pdf",
   },
 ] as const;
 
@@ -697,24 +767,24 @@ export const spgBooks = [
   {
     title: "An A–Z Guide for a Greenchef",
     author: "Annie Pascual-Guerrero",
-    image: "/images/book-greenchef.png",
-    width: 165,
-    height: 233,
-    href: "https://drive.google.com/file/d/1_LAReUzBT8OVS8-hFFkwWEZbkzuuNfbV/view",
+    image: "/images/book-greenchef.jpg",
+    width: 1264,
+    height: 2000,
+    href: "/books/greenchef",
   },
   {
     title: "An A–Z Guide for a Green Pinoy",
     author: "Annie Pascual-Guerrero",
-    image: "/images/book-green-pinoy.png",
-    width: 142,
-    height: 211,
+    image: "/images/book-green-pinoy.jpg",
+    width: 1280,
+    height: 2000,
   },
   {
     title: "Sustainability Manual",
     author: "Annie Pascual-Guerrero",
-    image: "/images/book-sustainability.png",
-    width: 210,
-    height: 224,
+    image: "/images/book-sustainability.jpg",
+    width: 1490,
+    height: 2000,
   },
 ] as const;
 
@@ -733,7 +803,7 @@ export const supportOffers = [
   {
     title: "A–Z Guide for a Greenchef",
     body: "An e-book. Every purchase helps support culinary education and scholarships.",
-    href: "https://drive.google.com/file/d/1_LAReUzBT8OVS8-hFFkwWEZbkzuuNfbV/view",
+    href: "/books/greenchef",
     prices: [
       "₱599 for the e-book",
       "₱999 for the e-book and support for a scholar",
@@ -792,6 +862,23 @@ export const award = {
   title: "2014 Sustainable Business Awards",
   body: "Cravings Group. Best Practice in Leadership for Corporate Social Responsibility.",
   href: "https://drive.google.com/file/d/1Ckq_0DNCsJ8lr7AiwHsqwNsD7nN8IpMa/view",
+} as const;
+
+export const antoninAward = {
+  title: "Antonin Careme Society, 2015",
+  body: "Susana “Annie” Pascual-Guerrero became the first Asian awardee of the Antonin Careme Society.",
+  href: "/documents/antonin-careme.pdf",
+  linkLabel: "Read the write-up",
+  image: "/images/award-antonin.jpg",
+  imageAlt: "Susana Annie Pascual-Guerrero speaking as the first Asian Antonin Careme honoree",
+} as const;
+
+export const pressClipping = {
+  outlet: "The Standard",
+  date: "September 6, 2015",
+  title: "The Wonders of Bokashi",
+  image: "/images/press-bokashi.jpg",
+  href: "/documents/2015-press-releases.pdf",
 } as const;
 
 export const pressReleases = [

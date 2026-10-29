@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { FacebookVideo } from "@/components/facebook-video";
+import { StoryTimeline } from "@/components/story-timeline";
 import {
+  antoninAward,
   award,
   candonDocuments,
   candonRows,
@@ -11,10 +13,10 @@ import {
   homePrograms,
   impactVideos,
   pillars,
+  pressClipping,
   pressReleases,
   stats,
   successfulScholars,
-  timeline,
 } from "@/lib/content";
 
 function monogram(name: string) {
@@ -152,10 +154,17 @@ export default function ImpactPage() {
                   {scholar.image ? (
                     <Image
                       src={scholar.image}
-                      alt="Filipino Pride: JM Sto. Domingo honored for his work as a chef in Dubai"
+                      alt={"imageAlt" in scholar ? scholar.imageAlt : scholar.name}
                       fill
                       sizes="112px"
-                      className="object-contain"
+                      className={
+                        "imageFit" in scholar && scholar.imageFit === "cover" ? "object-cover" : "object-contain"
+                      }
+                      style={
+                        "imageFit" in scholar && scholar.imageFit === "cover"
+                          ? { objectPosition: "center 18%" }
+                          : undefined
+                      }
                     />
                   ) : (
                     <span className="flex size-full items-center justify-center font-serif text-xl text-green">
@@ -301,7 +310,55 @@ export default function ImpactPage() {
               Read the citation
             </a>
           </article>
+          <article className="mt-4 grid gap-6 border border-line bg-white p-6 sm:grid-cols-[220px_1fr] sm:items-center sm:p-8">
+            <div className="relative aspect-[3/2] bg-sand">
+              <Image
+                src={antoninAward.image}
+                alt={antoninAward.imageAlt}
+                fill
+                sizes="220px"
+                className="object-cover object-[center_30%]"
+              />
+            </div>
+            <div>
+              <h3 className="font-serif text-2xl text-ink sm:text-3xl">{antoninAward.title}</h3>
+              <p className="mt-2 text-base leading-7 text-stone">{antoninAward.body}</p>
+              <a
+                href={antoninAward.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+              >
+                {antoninAward.linkLabel}
+              </a>
+            </div>
+          </article>
           <p className="mt-12 text-sm font-bold tracking-[0.12em] text-blue uppercase">Press releases</p>
+          <figure className="mt-6 grid items-start gap-6 border border-line bg-white p-6 sm:grid-cols-[minmax(0,280px)_1fr] sm:p-8">
+            <div className="relative aspect-[3/4] bg-sand">
+              <Image
+                src={pressClipping.image}
+                alt="Manila Standard clipping, The Wonders of Bokashi, September 6, 2015"
+                fill
+                sizes="280px"
+                className="object-contain"
+              />
+            </div>
+            <figcaption>
+              <p className="text-xs font-bold tracking-[0.14em] text-blue uppercase">
+                {pressClipping.outlet} · {pressClipping.date}
+              </p>
+              <p className="mt-2 font-serif text-2xl text-ink">{pressClipping.title}</p>
+              <a
+                href={pressClipping.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+              >
+                2015 press compilation
+              </a>
+            </figcaption>
+          </figure>
           <ol className="mt-4 grid md:grid-cols-2 md:gap-x-12">
             {pressReleases.map((item, index) => (
               <li key={item.title} className="border-t border-line py-4">
@@ -404,25 +461,7 @@ export default function ImpactPage() {
           <h2 className="font-serif text-[clamp(2.1rem,4vw,3.8rem)] text-cream">
             From one vision to a growing network.
           </h2>
-          <p className="mt-8 text-sm text-cream/80 sm:hidden">Swipe through the years.</p>
-          <ol
-            tabIndex={0}
-            aria-label="Milestones"
-            className="mt-4 flex snap-x gap-4 overflow-x-auto pb-1 focus-visible:outline-offset-4 sm:mt-10 sm:grid sm:grid-cols-2 sm:gap-x-10 sm:gap-y-8 sm:overflow-visible"
-          >
-            {timeline.map((item) => (
-              <li
-                key={item.id}
-                className={`w-[min(78vw,260px)] shrink-0 snap-start border-t border-white/25 pt-4 sm:w-auto ${
-                  item.body.length > 240 ? "sm:col-span-2" : ""
-                }`}
-              >
-                <p className="text-xs font-bold tracking-[0.14em] text-peach uppercase">{item.year}</p>
-                <h3 className="mt-2 font-serif text-xl leading-snug text-cream">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-white">{item.body}</p>
-              </li>
-            ))}
-          </ol>
+          <StoryTimeline tone="deep" idPrefix="impact" />
           <Link
             href="/about#work"
             className="mt-12 inline-flex h-[50px] items-center border border-white px-7 text-sm font-medium tracking-[0.1em] uppercase hover:bg-white hover:text-green-deep"

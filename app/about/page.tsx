@@ -88,20 +88,33 @@ export default function AboutPage() {
       </section>
 
       <section className="bg-white" aria-labelledby="story-heading">
-        <div className="page-wrap py-16 lg:py-24">
+        <div className="page-wrap py-16 text-center lg:py-24">
           <p className="text-[13px] font-bold tracking-[0.18em] text-blue uppercase">Our story</p>
           <h2
             id="story-heading"
-            className="mt-3 max-w-3xl font-display text-[clamp(2.2rem,4.4vw,4.2rem)] leading-[1.02] font-semibold tracking-[-0.04em] text-green-deep"
+            className="mx-auto mt-3 max-w-3xl font-display text-[clamp(2.2rem,4.4vw,4.2rem)] leading-[1.02] font-semibold tracking-[-0.04em] text-green-deep"
           >
-            They are all cooked for a cause.
+            They all cooked for a cause.
           </h2>
-          <div className="mt-8 max-w-3xl space-y-4 text-base leading-8 text-stone sm:text-lg">
+          <div className="mx-auto mt-8 max-w-3xl space-y-4 text-base leading-8 text-stone sm:text-lg">
             {ourStory.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          <ul className="mt-8 flex flex-col gap-3">
+          <figure className="mt-10">
+            <Image
+              src="/images/mobile-kitchen.jpg"
+              alt="The Mobile Kitchen at the Manila Food and Wine Festival"
+              width={1600}
+              height={762}
+              sizes="(min-width: 1024px) 1400px, 100vw"
+              className="h-auto w-full"
+            />
+            <figcaption className="mt-3 text-sm text-stone">
+              Mobile Kitchen at the Manila Food and Wine Festival.
+            </figcaption>
+          </figure>
+          <ul className="mt-8 flex flex-col items-center gap-3">
             {founderLinks.map((link) => (
               <li key={link.href}>
                 <a
@@ -132,7 +145,7 @@ export default function AboutPage() {
               );
               return (
                 <li key={book.title}>
-                  <figure>
+                  <figure className="mx-auto w-fit">
                     {cover}
                     <figcaption className="mt-3 max-w-[16rem] text-sm font-medium leading-6 text-ink">
                       {book.title}
@@ -141,8 +154,6 @@ export default function AboutPage() {
                     {"href" in book ? (
                       <a
                         href={book.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         className="mt-2 inline-flex text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
                       >
                         Read the e-book
@@ -187,17 +198,40 @@ export default function AboutPage() {
                   event.image ? "grid lg:grid-cols-2 lg:gap-14" : "border-t border-white/25 pt-2"
                 }`}
               >
-                {event.image ? (
-                  <div className={`relative aspect-[575/450] bg-sage ${event.flip ? "lg:order-2" : ""}`}>
+                {"images" in event ? (
+                  <div className={`grid gap-3 ${event.flip ? "lg:order-2" : ""}`}>
+                    {event.images.map((photo) => (
+                      <div key={photo.src} className="relative aspect-[3/2] bg-sand">
+                        <Image
+                          src={photo.src}
+                          alt={photo.alt}
+                          fill
+                          sizes="(min-width: 1024px) 40vw, 100vw"
+                          className="object-cover"
+                          style={{ objectPosition: photo.position }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : event.image ? (
+                  <div
+                    className={`relative bg-sand ${event.flip ? "lg:order-2" : ""} ${
+                      "fit" in event && event.fit === "contain"
+                        ? `mx-auto w-full max-w-md ${"frame" in event && event.frame === "3/4" ? "aspect-[3/4]" : "aspect-[2/3]"}`
+                        : "aspect-[575/450]"
+                    }`}
+                  >
                     <Image
                       src={event.image}
                       alt={event.alt}
                       fill
                       sizes="(min-width: 1024px) 40vw, 100vw"
-                      className="object-cover"
+                      className={"fit" in event && event.fit === "contain" ? "object-contain" : "object-cover"}
                       style={{ objectPosition: event.position }}
                     />
-                    <span className="pointer-events-none absolute right-4 bottom-4 size-14 border border-white/55 sm:size-[72px]" aria-hidden />
+                    {"fit" in event && event.fit === "contain" ? null : (
+                      <span className="pointer-events-none absolute right-4 bottom-4 size-14 border border-white/55 sm:size-[72px]" aria-hidden />
+                    )}
                   </div>
                 ) : null}
                 <div>
@@ -215,6 +249,22 @@ export default function AboutPage() {
                       <ul className="list-disc space-y-2 pl-5">
                         {event.points.map((point) => (
                           <li key={point}>{point}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                    {"links" in event ? (
+                      <ul className="space-y-2">
+                        {event.links.map((link) => (
+                          <li key={link.href}>
+                            <a
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-sm font-medium tracking-[0.08em] uppercase underline underline-offset-4 hover:text-cream"
+                            >
+                              {link.label}
+                            </a>
+                          </li>
                         ))}
                       </ul>
                     ) : null}
@@ -238,6 +288,17 @@ export default function AboutPage() {
           <h2 className="mt-3 max-w-xl font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] font-semibold tracking-[-0.03em] text-green-deep">
             Read the programs in full.
           </h2>
+          <figure className="mt-8 max-w-[16rem]">
+            <a href="/images/flyer-celi.jpg" target="_blank" rel="noopener noreferrer">
+              <Image
+                src="/images/flyer-celi.jpg"
+                alt="CELI flyer with the vision, mission, and Kitchen Scholars cover"
+                width={1415}
+                height={2000}
+                className="h-auto w-full border border-line"
+              />
+            </a>
+          </figure>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2">
             {programDocuments.map((document) => (
               <li key={document.href}>
