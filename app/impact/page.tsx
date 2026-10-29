@@ -154,7 +154,7 @@ export default function ImpactPage() {
                   {scholar.image ? (
                     <Image
                       src={scholar.image}
-                      alt={"imageAlt" in scholar ? scholar.imageAlt : scholar.name}
+                      alt={scholar.imageAlt}
                       fill
                       sizes="112px"
                       className={
