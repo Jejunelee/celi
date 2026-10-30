@@ -40,7 +40,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-white/78" />
         <div className="page-wrap relative flex min-h-[640px] flex-col items-center justify-center py-16 text-center lg:min-h-[780px]">
           <p className="text-sm font-medium tracking-[0.14em] text-ink-soft uppercase sm:text-lg">
-            Culinary Eco Life Inc.
+            Culinary Eco-Life, Inc.
           </p>
           <h1 className="mt-4 max-w-5xl font-serif text-[clamp(2.7rem,6.4vw,6.6rem)] leading-[0.92] tracking-[-0.045em] text-ink-soft">
             Teach them to cook.
@@ -299,7 +299,7 @@ export default function HomePage() {
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 sm:text-lg">
               Approximately 4,000 beneficiaries have come through the CEF/CELI program since
-              2001. They are all cooked for a cause.
+              2001. They Are All Cooked for A Cause!
             </p>
           </div>
           <StoryTimeline tone="green" idPrefix="home" />
@@ -366,6 +366,16 @@ export default function HomePage() {
           <div className="mt-10 grid items-start gap-4 lg:grid-cols-2">
             {supportOffers.map((offer) => (
               <article key={offer.title} className="border border-line bg-white px-6 py-8 sm:px-8">
+                {"image" in offer ? (
+                  <Image
+                    src={offer.image}
+                    alt={offer.imageAlt}
+                    width={offer.imageWidth}
+                    height={offer.imageHeight}
+                    className="mb-6 h-auto w-full"
+                    style={{ width: "100%", height: "auto" }}
+                  />
+                ) : null}
                 <h3 className="font-serif text-3xl text-ink">{offer.title}</h3>
                 <p className="mt-3 text-base leading-7 text-stone">{offer.body}</p>
                 {"prices" in offer ? (

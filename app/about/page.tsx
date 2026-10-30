@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ImageRail } from "@/components/image-rail";
 import { PeopleRail } from "@/components/people-rail";
-import { events, founderLinks, ourStory, programDocuments, spgBooks } from "@/lib/content";
+import {
+  events,
+  founderLinks,
+  ourStory,
+  programDocuments,
+  spgBooks,
+  volunteerism,
+  volunteerPhotos,
+} from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -25,7 +34,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-white/80" />
         <div className="page-wrap relative flex min-h-[620px] flex-col items-center justify-center py-16 text-center lg:min-h-[760px]">
           <p className="text-sm font-medium tracking-[0.14em] text-ink-soft uppercase sm:text-lg">
-            Culinary Eco Life Inc.
+            Culinary Eco-Life, Inc.
           </p>
           <h1 className="mt-4 max-w-4xl font-display text-[clamp(2.6rem,6vw,5.4rem)] leading-[0.98] font-semibold tracking-[-0.04em] text-ink">
             Meet the hands that feed the mission.
@@ -94,7 +103,7 @@ export default function AboutPage() {
             id="story-heading"
             className="mx-auto mt-3 max-w-3xl font-display text-[clamp(2.2rem,4.4vw,4.2rem)] leading-[1.02] font-semibold tracking-[-0.04em] text-green-deep"
           >
-            They all cooked for a cause.
+            They Are All Cooked for A Cause!
           </h2>
           <div className="mx-auto mt-8 max-w-3xl space-y-4 text-base leading-8 text-stone sm:text-lg">
             {ourStory.map((paragraph) => (
@@ -278,6 +287,28 @@ export default function AboutPage() {
                 </div>
               </article>
             ))}
+            <article id="volunteerism" className="scroll-mt-28 border-t border-white/25 pt-16 lg:pt-24">
+              <p className="text-[11px] font-bold tracking-[0.16em] text-cream uppercase">
+                {volunteerism.kicker}
+              </p>
+              <h3 className="mt-3 max-w-3xl font-display text-[clamp(2rem,3.4vw,3.5rem)] leading-[1.02] font-bold tracking-[-0.03em]">
+                {volunteerism.title}
+              </h3>
+              <div className="mt-5 max-w-3xl space-y-4 text-sm leading-7 text-white sm:text-[15px]">
+                {volunteerism.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+              <div className="mt-8">
+                <ImageRail images={volunteerPhotos} label="Volunteerism photos" onDark />
+              </div>
+              <Link
+                href="/#get-involved"
+                className="mt-6 inline-flex items-center gap-3 text-[11px] font-bold tracking-[0.16em] uppercase hover:text-cream"
+              >
+                Volunteer <span aria-hidden>→</span>
+              </Link>
+            </article>
           </div>
         </div>
       </section>

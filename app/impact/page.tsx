@@ -160,11 +160,14 @@ export default function ImpactPage() {
                       className={
                         "imageFit" in scholar && scholar.imageFit === "cover" ? "object-cover" : "object-contain"
                       }
-                      style={
-                        "imageFit" in scholar && scholar.imageFit === "cover"
-                          ? { objectPosition: "center 18%" }
-                          : undefined
-                      }
+                      style={{
+                        objectPosition:
+                          "imagePosition" in scholar
+                            ? scholar.imagePosition
+                            : "imageFit" in scholar && scholar.imageFit === "cover"
+                              ? "center 18%"
+                              : "center",
+                      }}
                     />
                   ) : (
                     <span className="flex size-full items-center justify-center font-serif text-xl text-green">
@@ -186,14 +189,23 @@ export default function ImpactPage() {
                     <p className="mt-2 text-sm leading-6 text-stone">{scholar.story}</p>
                   ) : null}
                   {"href" in scholar && scholar.href ? (
-                    <a
-                      href={scholar.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 inline-flex text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
-                    >
-                      {scholar.linkLabel}
-                    </a>
+                    scholar.href.startsWith("/") && !scholar.href.endsWith(".pdf") ? (
+                      <Link
+                        href={scholar.href}
+                        className="mt-3 inline-flex text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+                      >
+                        {scholar.linkLabel}
+                      </Link>
+                    ) : (
+                      <a
+                        href={scholar.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
+                      >
+                        {scholar.linkLabel}
+                      </a>
+                    )
                   ) : null}
                 </div>
               </li>
@@ -323,14 +335,12 @@ export default function ImpactPage() {
             <div>
               <h3 className="font-serif text-2xl text-ink sm:text-3xl">{antoninAward.title}</h3>
               <p className="mt-2 text-base leading-7 text-stone">{antoninAward.body}</p>
-              <a
+              <Link
                 href={antoninAward.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="mt-4 inline-flex text-sm font-medium tracking-[0.08em] text-blue uppercase underline underline-offset-4"
               >
                 {antoninAward.linkLabel}
-              </a>
+              </Link>
             </div>
           </article>
           <p className="mt-12 text-sm font-bold tracking-[0.12em] text-blue uppercase">Press releases</p>
